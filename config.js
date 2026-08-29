@@ -18,8 +18,8 @@ const SITE_CONFIG = {
     "redesSociais": {
         "whatsapp": {
             "ativo": true,
-            "numero": "5511999999999",
-            "mensagem": "Ola! Gostaria de mais informacoes sobre seus servicos."
+            "numero": "5511954556168",
+            "mensagem": "Ola! Gostaria de mais informações sobre seus serviços."
         },
         "instagram": {
             "ativo": true,
@@ -42,20 +42,20 @@ const SITE_CONFIG = {
                 "nome": "Dr. Wilson Silva",
                 "oab": "OAB/SP 123.456",
                 "especialidade": "Direito do Consumidor",
-                "bio": "Especialista em defesa do consumidor com mais de 15 anos de experiencia em acoes coletivas e individuais.",
+                "bio": "Especialista em defesa do consumidor com mais de 15 anos de experiencia em ações coletivas e individuais.",
                 "foto": "imagens/advogado1.jpeg"
             },
             {
                 "nome": "Dr. Claudio Firmino",
                 "oab": "OAB/SP 234.567",
                 "especialidade": "Direito Civil",
-                "bio": "Atuacao em contratos, responsabilidade civil e direito de familia, com abordagem humanizada.",
+                "bio": "Atuação em contratos, responsabilidade civil e direito de família, com abordagem humanizada.",
                 "foto": "imagens/advogado2.jpeg"
             }
         ]
     },
     "formulario": {
-        "endpointFormspree": "COLE_SEU_ENDPOINT_AQUI",
+        "endpointFormspree": "https://formspree.io/f/xwlkpqgg",
         "campos": [
             {
                 "nome": "nome",
@@ -102,7 +102,7 @@ const SITE_CONFIG = {
         "Direito Civil",
         "Direito do Consumidor",
         "Direito Trabalhista",
-        "Direito Previdenciario"
+        "Direito Previdenciário"
     ],
     "secoes": {
         "areas": window.SITE_AREAS,
@@ -113,34 +113,34 @@ const SITE_CONFIG = {
         },
         "sobre": {
             "titulo": "Sobre Silva&Firmino",
-            "texto": "Nascemos com o proposito de oferecer servicos juridicos de alta qualidade, pautados pela etica, transparencia e compromisso com os resultados."
+            "texto": "Nascemos com o proposito de oferecer serviços jurídicos de alta qualidade, pautados pela ética, transparência e compromisso com os resultados."
         },
         "informativo": {
             "titulo": "Seus Direitos",
-            "subtitulo": "Conheca seus direitos e saiba como protege-los",
+            "subtitulo": "Conheça seus direitos e saiba como protege-los",
             "itens": [
                 {
-                    "titulo": "Direito a Informacao",
-                    "descricao": "Voce tem direito a informacoes claras e adequadas sobre produtos e servicos, incluindo precos, caracteristicas e riscos."
+                    "titulo": "Direito a Informação",
+                    "descricao": "Você tem direito a informações claras e adequadas sobre produtos e serviços, incluindo preços, características e riscos."
                 },
                 {
-                    "titulo": "Direito a Seguranca",
-                    "descricao": "Produtos e servicos nao podem oferecer riscos a sua saude ou seguranca. Se houver defeito, o fornecedor e responsavel."
+                    "titulo": "Direito a Segurança",
+                    "descricao": "Produtos e serviços não podem oferecer riscos a sua saúde ou segurança. Se houver defeito, o fornecedor e responsável."
                 },
                 {
                     "titulo": "Direito de Arrependimento",
-                    "descricao": "Em compras online ou fora do estabelecimento comercial, voce tem 7 dias para desistir da compra sem justificativa."
+                    "descricao": "Em compras online ou fora do estabelecimento comercial, você tem 7 dias para desistir da compra sem justificativa."
                 },
                 {
                     "titulo": "Direito a Qualidade",
-                    "descricao": "Produtos e servicos devem atender as expectativas legitimas e as informacoes fornecidas pelo fornecedor."
+                    "descricao": "Produtos e serviços devem atender as expectativas legitimas e as informações fornecidas pelo fornecedor."
                 }
             ]
         },
         "contato": {
             "titulo": "Entre em Contato",
             "endereco": "Rua Exemplo, 123 - Centro, Sao Paulo - SP",
-            "telefone": "(11) 9999-9999",
+            "telefone": "(11) 912760180",
             "email": "contato@silvaefirminoadv.com.br",
             "horario": "Segunda a Sexta, 9h as 18h"
         }
