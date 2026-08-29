@@ -11,9 +11,9 @@
         "textoClaro": "#FFFFFF"
     },
     "imagens": {
-        "hero": "imagens/hero.jpeg",
-        "sobre": "imagens/sobre.jpeg",
-        "contato": "imagens/contato.jpeg"
+        "hero": "imagens/Hero.jpg",
+        "sobre": "imagens/Sobre.jpg",
+        "contato": "imagens/Contato.jpg"
     },
     "redesSociais": {
         "whatsapp": {
@@ -43,14 +43,14 @@
                 "oab": "OAB/SP 123.456",
                 "especialidade": "Direito do Consumidor",
                 "bio": "Especialista em defesa do consumidor com mais de 15 anos de experiencia em acoes coletivas e individuais.",
-                "foto": "imagens/advogado1.jpg"
+                "foto": "imagens/advogado1.jpeg"
             },
             {
                 "nome": "Dra. Claudio Firmino",
                 "oab": "OAB/SP 234.567",
                 "especialidade": "Direito Civil",
                 "bio": "Atuacao em contratos, responsabilidade civil e direito de familia, com abordagem humanizada.",
-                "foto": "imagens/advogado2.jpg"
+                "foto": "imagens/advogado2.jpeg"
             }
         ]
     },
