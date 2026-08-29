@@ -1,4 +1,4 @@
-const SITE_CONFIG = {
+﻿const SITE_CONFIG = {
     "nome": "Silva & Firmino Advogados",
     "slogan": "Excelencia juridica com compromisso e dedicacao",
     "descricao": "Escritorio de advocacia especializado em solucoes juridicas personalizadas, com atuacao etica e transparente.",
@@ -11,9 +11,9 @@ const SITE_CONFIG = {
         "textoClaro": "#FFFFFF"
     },
     "imagens": {
-        "hero": "imagens/hero.jpg",
-        "sobre": "imagens/sobre.jpg",
-        "contato": "imagens/contato.jpg"
+        "hero": "imagens/hero.jpeg",
+        "sobre": "imagens/sobre.jpeg",
+        "contato": "imagens/contato.jpeg"
     },
     "redesSociais": {
         "whatsapp": {
