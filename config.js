@@ -1,4 +1,4 @@
-﻿const SITE_CONFIG = {
+const SITE_CONFIG = {
     "nome": "Silva & Firmino Advogados",
     "slogan": "Excelencia juridica com compromisso e dedicacao",
     "descricao": "Escritorio de advocacia especializado em solucoes juridicas personalizadas, com atuacao etica e transparente.",
@@ -46,7 +46,7 @@
                 "foto": "imagens/advogado1.jpeg"
             },
             {
-                "nome": "Dra. Claudio Firmino",
+                "nome": "Dr. Claudio Firmino",
                 "oab": "OAB/SP 234.567",
                 "especialidade": "Direito Civil",
                 "bio": "Atuacao em contratos, responsabilidade civil e direito de familia, com abordagem humanizada.",
