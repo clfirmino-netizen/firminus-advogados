@@ -11,9 +11,9 @@
         "textoClaro": "#FFFFFF"
     },
     "imagens": {
-        "hero": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1920&q=80",
-        "sobre": "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80",
-        "contato": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80"
+        "hero": "imagens/hero.jpg",
+        "sobre": "imagens/sobre.jpg",
+        "contato": "imagens/contato.jpg"
     },
     "redesSociais": {
         "whatsapp": {
@@ -43,14 +43,14 @@
                 "oab": "OAB/SP 123.456",
                 "especialidade": "Direito do Consumidor",
                 "bio": "Especialista em defesa do consumidor com mais de 15 anos de experiencia em acoes coletivas e individuais.",
-                "foto": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80"
+                "foto": "imagens/advogado1.jpg"
             },
             {
                 "nome": "Dra. Ana Costa",
                 "oab": "OAB/SP 234.567",
                 "especialidade": "Direito Civil",
                 "bio": "Atuacao em contratos, responsabilidade civil e direito de familia, com abordagem humanizada.",
-                "foto": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80"
+                "foto": "imagens/advogado2.jpg"
             }
         ]
     },
