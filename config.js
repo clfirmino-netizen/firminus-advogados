@@ -1,7 +1,7 @@
-﻿const SITE_CONFIG = {
+const SITE_CONFIG = {
     "nome": "Silva & Firmino Advogados",
-    "slogan": "Excelencia juridica com compromisso e dedicacao",
-    "descricao": "Escritorio de advocacia especializado em solucoes juridicas personalizadas, com atuacao etica e transparente.",
+    "slogan": "Excelência jurídica com compromisso e dedicação",
+    "descricao": "Escritório de advocacia especializado em soluções jurídicas personalizadas, com atuação ética e transparente.",
     "cores": {
         "gradientePrincipal": "linear-gradient(135deg, #0A1A2F 0%, #1B3A5C 50%, #274B6D 100%)",
         "gradienteDestaque": "linear-gradient(135deg, #C9A24B 0%, #E8C877 100%)",
@@ -80,7 +80,14 @@
                 "label": "Area de interesse",
                 "tipo": "select",
                 "obrigatorio": true,
-                "opcoes": [ "Direito Criminal", "Direito Civil", "Direito do Consumidor", "Direito Trabalhista", "Direito Previdenciario", "Outro" ]
+                "opcoes": [
+                    "Direito Criminal",
+                    "Direito Civil",
+                    "Direito do Consumidor",
+                    "Direito Trabalhista",
+                    "Direito Previdenciario",
+                    "Outro"
+                ]
             },
             {
                 "nome": "mensagem",
@@ -90,7 +97,7 @@
             }
         ]
     },
-        "rotativoInformativo": [
+    "rotativoInformativo": [
         "Direito Criminal",
         "Direito Civil",
         "Direito do Consumidor",
@@ -98,16 +105,16 @@
         "Direito Previdenciario"
     ],
     "secoes": {
+        "areas": window.SITE_AREAS,
         "home": {
-            "titulo": "Bem-vindo ao nosso escritorio",
-            "subtitulo": "Solucoes juridicas com excelencia e transparencia",
-            "botaoTexto": "Conheca nosso trabalho"
+            "titulo": "Bem-vindo ao nosso escritório",
+            "subtitulo": "Soluções jurídicas com excelência e transparência",
+            "botaoTexto": "Conheça nosso trabalho"
         },
         "sobre": {
             "titulo": "Sobre Silva&Firmino",
             "texto": "Nascemos com o proposito de oferecer servicos juridicos de alta qualidade, pautados pela etica, transparencia e compromisso com os resultados."
         },
-        "areas": window.SITE_AREAS,
         "informativo": {
             "titulo": "Seus Direitos",
             "subtitulo": "Conheca seus direitos e saiba como protege-los",

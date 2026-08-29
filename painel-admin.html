@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -58,14 +58,21 @@ body{font-family:'Segoe UI',sans-serif;background:#f0f2f5;color:#333;line-height
 <div class="container">
 
 <div class="arquivo-box">
-<span class="status vazio" id="status">⚠️ Nenhum arquivo carregado</span>
+<span class="status vazio" id="status">⚠️ Nenhum config.js carregado</span>
 <button class="btn btn-primary" onclick="document.getElementById('input-arquivo').click()">📂 Carregar config.js</button>
 <button class="btn btn-salvar" onclick="salvarArquivo()">💾 Salvar config.js</button>
 <input type="file" id="input-arquivo" accept=".js" style="display:none" onchange="carregarArquivo(event)">
 </div>
 
+<div class="arquivo-box">
+<span class="status vazio" id="status-areas">⚠️ Nenhum areas.js carregado</span>
+<button class="btn btn-primary" onclick="document.getElementById('input-areas').click()">📂 Carregar areas.js</button>
+<button class="btn btn-salvar" onclick="salvarAreasArquivo()">💾 Salvar areas.js</button>
+<input type="file" id="input-areas" accept=".js" style="display:none" onchange="carregarAreas(event)">
+</div>
+
 <div class="alerta alerta-info">
-<strong>Instruções:</strong> 1) Carregue o <code>config.js</code> → 2) Edite nas abas → 3) Salve → 4) Execute o <code>atualizar-github.bat</code>
+<strong>Instruções:</strong> 1) Carregue o <code>config.js</code> E o <code>areas.js</code> → 2) Edite nas abas → 3) Salve cada arquivo separadamente → 4) Execute o <code>atualizar-github.bat</code>
 </div>
 
 <div class="tabs">
@@ -207,6 +214,7 @@ body{font-family:'Segoe UI',sans-serif;background:#f0f2f5;color:#333;line-height
 <script>
 let cfg = null;
 let dadosTemp = {};
+let areasCfg = null;
 
 function mudarAba(nome, el) {
     coletarAbaAtual();
@@ -236,6 +244,69 @@ function carregarArquivo(e) {
     reader.readAsText(file);
 }
 
+function carregarAreas(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+        try {
+            const texto = ev.target.result;
+            const match = texto.match(/const SITE_AREAS\s*=\s*(\{[\s\S]*?\});/);
+            if (!match) { alert('Arquivo inválido. Verifique se é o areas.js correto.'); return; }
+            areasCfg = eval('(' + match[1] + ')');
+            document.getElementById('f-areasTitulo').value = areasCfg.titulo || '';
+            renderAreas();
+            document.getElementById('status-areas').textContent = '✅ ' + file.name + ' carregado';
+            document.getElementById('status-areas').className = 'status ok';
+        } catch(err) {
+            alert('Erro ao ler areas.js: ' + err.message);
+        }
+    };
+    reader.readAsText(file);
+}
+
+function gerarAreasJS() {
+    if (!areasCfg) return '';
+    areasCfg.titulo = document.getElementById('f-areasTitulo').value;
+    const lista = [];
+    document.querySelectorAll('#lista-areas .card-item').forEach(c => {
+        const item = {};
+        c.querySelectorAll('input, textarea, select').forEach(el => {
+            if (el.dataset.chave) item[el.dataset.chave] = el.value;
+        });
+        if (Object.keys(item).length > 0) lista.push(item);
+    });
+    areasCfg.areas = lista;
+    let js = 'const SITE_AREAS = ' + JSON.stringify(areasCfg, null, 4) + ';\n';
+    js += 'window.SITE_AREAS = SITE_AREAS;\n';
+    return js;
+}
+
+async function salvarAreasArquivo() {
+    if (!areasCfg) { alert('Carregue o areas.js primeiro!'); return; }
+    const conteudo = gerarAreasJS();
+    if ('showSaveFilePicker' in window) {
+        try {
+            const handle = await window.showSaveFilePicker({
+                suggestedName: 'areas.js',
+                types: [{ description: 'JavaScript', accept: {'text/javascript': ['.js']} }]
+            });
+            const w = await handle.createWritable();
+            await w.write(conteudo);
+            await w.close();
+            alert('✅ areas.js salvo com sucesso!\n\nAgora execute o "atualizar-github.bat" para publicar.');
+        } catch(e) {
+            if (e.name !== 'AbortError') alert('Erro: ' + e.message);
+        }
+    } else {
+        const blob = new Blob([conteudo], {type:'text/javascript'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'areas.js';
+        a.click();
+        alert('⚠️ Seu navegador não permite salvar direto.\n\nO arquivo foi baixado. Substitua o areas.js original manualmente.');
+    }
+}
 function popularTudo() {
     document.getElementById('f-nome').value = cfg.nome || '';
     document.getElementById('f-slogan').value = cfg.slogan || '';
@@ -263,7 +334,7 @@ function popularTudo() {
     document.getElementById('f-sobreTitulo').value = cfg.secoes?.sobre?.titulo || '';
     document.getElementById('f-sobreTexto').value = cfg.secoes?.sobre?.texto || '';
 
-    document.getElementById('f-areasTitulo').value = cfg.secoes?.areas?.titulo || '';
+    document.getElementById('f-areasTitulo').value = areasCfg?.titulo || '';
     renderAreas();
 
     document.getElementById('f-infoTitulo').value = cfg.secoes?.informativo?.titulo || '';
@@ -327,8 +398,7 @@ function coletarAbaAtual() {
         texto: document.getElementById('f-sobreTexto').value
     };
 
-    cfg.secoes.areas.titulo = document.getElementById('f-areasTitulo').value;
-    cfg.secoes.areas.areas = coletarLista('area');
+    // Áreas gerenciadas separadamente via areasCfg (areas.js)
 
     cfg.secoes.informativo.titulo = document.getElementById('f-infoTitulo').value;
     cfg.secoes.informativo.subtitulo = document.getElementById('f-infoSubtitulo').value;
@@ -386,7 +456,7 @@ function coletarLista(tipo) {
 function renderAreas() {
     const lista = document.getElementById('lista-areas');
     lista.innerHTML = '';
-    (cfg.secoes?.areas?.areas || []).forEach((a, i) => {
+    (areasCfg?.areas || []).forEach((a, i) => {
         lista.appendChild(criarCard('area', i, [
             {chave:'titulo', label:'Título', valor:a.titulo},
             {chave:'descricao', label:'Descrição', valor:a.descricao, tipo:'textarea'},
@@ -395,7 +465,8 @@ function renderAreas() {
     });
 }
 function adicionarArea() {
-    cfg.secoes.areas.areas.push({titulo:'', descricao:'', icone:'shield'});
+    if (!areasCfg) { alert('Carregue o areas.js primeiro!'); return; }
+    areasCfg.areas.push({titulo:'', descricao:'', icone:'shield'});
     renderAreas();
 }
 
@@ -495,7 +566,7 @@ function criarCard(tipo, i, campos) {
 }
 
 function removerItem(tipo, i) {
-    if (tipo === 'area') { cfg.secoes.areas.areas.splice(i,1); renderAreas(); }
+    if (tipo === 'area') { if (areasCfg) { areasCfg.areas.splice(i,1); renderAreas(); } }
     if (tipo === 'itemInfo') { cfg.secoes.informativo.itens.splice(i,1); renderItensInfo(); }
     if (tipo === 'adv') { cfg.equipe.advogados.splice(i,1); renderAdvogados(); }
 }
@@ -506,7 +577,11 @@ function escapar(s) {
 
 function gerarJS() {
     coletarAbaAtual();
+    const areasRef = cfg.secoes.areas;
+    delete cfg.secoes.areas;
     let js = 'const SITE_CONFIG = ' + JSON.stringify(cfg, null, 4) + ';\n';
+    js = js.replace(/("secoes"\s*:\s*\{)/, '$1\n        "areas": window.SITE_AREAS,');
+    cfg.secoes.areas = areasRef;
     js += 'window.SITE_CONFIG = SITE_CONFIG;\n';
     return js;
 }
