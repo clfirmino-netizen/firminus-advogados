@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <meta name="description" content="">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header"><nav class="nav"><div class="logo"><span class="logo-text" id="logo-topo"></span></div><ul class="nav-menu"><li><a href="#home">Inicio</a></li><li><a href="#sobre">Sobre</a></li><li><a href="#areas">Areas</a></li><li><a href="#informativo">Informacoes</a></li><li><a href="#equipe">Equipe</a></li><li><a href="#contato">Contato</a></li></ul><button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button></nav></header>
+    <section id="home" class="hero"><div class="hero-overlay"></div><div class="hero-content"><h1 class="hero-title" id="hero-titulo"></h1><p class="hero-subtitle" id="hero-subtitulo"></p><a href="#sobre" class="btn-primary" id="hero-botao"></a></div></section>
+    <section id="sobre" class="section sobre"><div class="container"><div class="sobre-grid"><div class="sobre-text"><h2 class="section-title" id="sobre-titulo"></h2><p class="sobre-descricao" id="sobre-texto"></p></div><div class="sobre-image"><img src="" alt="Sobre" class="sobre-img" id="sobre-img"></div></div></div></section>
+    <section id="areas" class="section areas"><div class="container"><h2 class="section-title" id="areas-titulo"></h2><div class="areas-grid" id="areas-grid"></div></div></section>
+    <section id="informativo" class="section informativo"><div class="container"><h2 class="section-title" id="informativo-titulo"></h2><p class="informativo-subtitulo" id="informativo-subtitulo"></p><div class="direitos-grid" id="informativo-grid"></div></div></section>
+    <section id="equipe" class="section equipe"><div class="balanca-bg"></div><div class="container"><h2 class="section-title" id="equipe-titulo"></h2><p class="equipe-subtitulo" id="equipe-subtitulo"></p><div class="equipe-grid" id="equipe-grid"></div></div></section>
+    <section id="contato" class="section contato"><div class="container"><h2 class="section-title" id="contato-titulo"></h2><div class="contato-wrapper"><div class="contato-info"><div class="contato-detalhes" id="contato-detalhes"></div></div><div class="contato-form"><form id="form-contato" class="form-contato"><div class="form-grid"><div class="form-group"><label for="nome">Nome completo</label><input type="text" id="nome" name="nome" required></div><div class="form-group"><label for="email">E-mail</label><input type="email" id="email" name="email" required></div><div class="form-group"><label for="telefone">Telefone</label><input type="tel" id="telefone" name="telefone" required></div><div class="form-group"><label for="assunto">Area de interesse</label><select id="assunto" name="assunto" required><option value="">Selecione...</option></select></div></div><div class="form-group full"><label for="mensagem">Descreva brevemente seu caso</label><textarea id="mensagem" name="mensagem" rows="5" required></textarea></div><button type="submit" class="btn-form" id="btn-enviar">Enviar mensagem</button><div class="form-feedback" id="form-feedback"></div></form></div></div></div></section>
+    <footer class="footer"><div class="container"><div class="footer-content"><div class="footer-logo"><span id="logo-rodape"></span></div><div class="redes-sociais" id="redes-sociais"></div><p class="footer-text" id="footer-texto"></p></div></div></footer>
+    <a href="#" id="whatsapp-float" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp"></a>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
