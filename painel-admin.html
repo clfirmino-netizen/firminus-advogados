@@ -1,0 +1,543 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel Admin - Firminus Advogados</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',sans-serif;background:#f0f2f5;color:#333;line-height:1.6}
+.topo{background:linear-gradient(135deg,#0A1A2F,#1B3A5C);color:#fff;padding:2rem;text-align:center}
+.topo h1{font-size:1.8rem;margin-bottom:.5rem}
+.topo p{opacity:.85;font-size:.95rem}
+.container{max-width:1100px;margin:0 auto;padding:2rem}
+.arquivo-box{background:#fff;padding:1.5rem;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.08);margin-bottom:2rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.arquivo-box .status{flex:1;font-weight:600}
+.arquivo-box .status.ok{color:#2E7D32}
+.arquivo-box .status.vazio{color:#C62828}
+.btn{padding:.7rem 1.5rem;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:.95rem;transition:all .2s}
+.btn-primary{background:linear-gradient(135deg,#C9A24B,#E8C877);color:#0A1A2F}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(201,162,75,.4)}
+.btn-salvar{background:#2E7D32;color:#fff}
+.btn-salvar:hover{background:#1B5E20}
+.btn-remover{background:#C62828;color:#fff;padding:.4rem .8rem;font-size:.85rem}
+.btn-adicionar{background:#1565C0;color:#fff}
+.tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.tab{padding:.6rem 1.2rem;background:#fff;border:2px solid #ddd;border-radius:8px;cursor:pointer;font-weight:500;font-size:.9rem;transition:all .2s}
+.tab:hover{border-color:#C9A24B}
+.tab.active{background:linear-gradient(135deg,#C9A24B,#E8C877);color:#0A1A2F;border-color:#C9A24B}
+.painel{background:#fff;padding:2rem;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.08);display:none}
+.painel.active{display:block}
+.painel h2{color:#0A1A2F;margin-bottom:1.5rem;padding-bottom:.5rem;border-bottom:2px solid #C9A24B}
+.campo{margin-bottom:1.2rem}
+.campo label{display:block;font-weight:600;color:#1B3A5C;margin-bottom:.4rem;font-size:.9rem}
+.campo input,.campo textarea,.campo select{width:100%;padding:.7rem;border:2px solid #ddd;border-radius:8px;font-size:.95rem;font-family:inherit;transition:border-color .2s}
+.campo input:focus,.campo textarea:focus,.campo select:focus{outline:none;border-color:#C9A24B}
+.campo textarea{resize:vertical;min-height:80px}
+.campo-check{display:flex;align-items:center;gap:.5rem}
+.campo-check input{width:auto}
+.card-item{background:#f9f9f9;border:2px solid #e0e0e0;border-radius:10px;padding:1.5rem;margin-bottom:1rem;position:relative}
+.card-item h3{color:#1B3A5C;margin-bottom:1rem;font-size:1rem}
+.card-item .btn-remover{position:absolute;top:1rem;right:1rem}
+.alerta{padding:1rem;border-radius:8px;margin-bottom:1.5rem;font-size:.9rem}
+.alerta-info{background:#E3F2FD;color:#0D47A1;border:1px solid #90CAF9}
+.alerta-sucesso{background:#E8F5E9;color:#1B5E20;border:1px solid #A5D6A7}
+.separador{margin:2rem 0 1.5rem;padding-top:1.5rem;border-top:2px dashed #ddd}
+.cor-linha{display:flex;gap:1rem;align-items:center}
+.cor-linha input[type=color]{width:60px;height:40px;border:2px solid #ddd;border-radius:8px;cursor:pointer;padding:2px}
+.cor-linha input[type=text]{flex:1}
+</style>
+</head>
+<body>
+
+<div class="topo">
+<h1>🔧 Painel Administrativo</h1>
+<p>Edite o conteúdo do site sem mexer no código</p>
+</div>
+
+<div class="container">
+
+<div class="arquivo-box">
+<span class="status vazio" id="status">⚠️ Nenhum arquivo carregado</span>
+<button class="btn btn-primary" onclick="document.getElementById('input-arquivo').click()">📂 Carregar config.js</button>
+<button class="btn btn-salvar" onclick="salvarArquivo()">💾 Salvar config.js</button>
+<input type="file" id="input-arquivo" accept=".js" style="display:none" onchange="carregarArquivo(event)">
+</div>
+
+<div class="alerta alerta-info">
+<strong>Instruções:</strong> 1) Carregue o <code>config.js</code> → 2) Edite nas abas → 3) Salve → 4) Execute o <code>atualizar-github.bat</code>
+</div>
+
+<div class="tabs">
+<div class="tab active" onclick="mudarAba('geral',this)">Geral</div>
+<div class="tab" onclick="mudarAba('cores',this)">Cores</div>
+<div class="tab" onclick="mudarAba('imagens',this)">Imagens</div>
+<div class="tab" onclick="mudarAba('home',this)">Home</div>
+<div class="tab" onclick="mudarAba('sobre',this)">Sobre</div>
+<div class="tab" onclick="mudarAba('areas',this)">Áreas</div>
+<div class="tab" onclick="mudarAba('informativo',this)">Informativo</div>
+<div class="tab" onclick="mudarAba('equipe',this)">Equipe</div>
+<div class="tab" onclick="mudarAba('contato',this)">Contato</div>
+<div class="tab" onclick="mudarAba('redes',this)">Redes Sociais</div>
+<div class="tab" onclick="mudarAba('formulario',this)">Formulário</div>
+</div>
+
+<!-- GERAL -->
+<div class="painel active" id="painel-geral">
+<h2>Configurações Gerais</h2>
+<div class="campo"><label>Nome do Escritório</label><input type="text" id="f-nome"></div>
+<div class="campo"><label>Slogan</label><input type="text" id="f-slogan"></div>
+<div class="campo"><label>Descrição</label><textarea id="f-descricao"></textarea></div>
+</div>
+
+<!-- CORES -->
+<div class="painel" id="painel-cores">
+<h2>Cores do Site</h2>
+<div class="alerta alerta-info">As cores em formato de texto podem ser editadas diretamente. Gradientes usam o formato <code>linear-gradient(...)</code>.</div>
+<div class="campo"><label>Gradiente Principal</label><input type="text" id="f-gradientePrincipal"></div>
+<div class="campo"><label>Gradiente de Destaque</label><input type="text" id="f-gradienteDestaque"></div>
+<div class="campo"><label>Fundo Claro</label><div class="cor-linha"><input type="color" id="c-fundoClaro" onchange="document.getElementById('f-fundoClaro').value=this.value"><input type="text" id="f-fundoClaro"></div></div>
+<div class="campo"><label>Texto Escuro</label><div class="cor-linha"><input type="color" id="c-textoEscuro" onchange="document.getElementById('f-textoEscuro').value=this.value"><input type="text" id="f-textoEscuro"></div></div>
+<div class="campo"><label>Texto Médio</label><div class="cor-linha"><input type="color" id="c-textoMedio" onchange="document.getElementById('f-textoMedio').value=this.value"><input type="text" id="f-textoMedio"></div></div>
+<div class="campo"><label>Texto Claro</label><div class="cor-linha"><input type="color" id="c-textoClaro" onchange="document.getElementById('f-textoClaro').value=this.value"><input type="text" id="f-textoClaro"></div></div>
+</div>
+
+<!-- IMAGENS -->
+<div class="painel" id="painel-imagens">
+<h2>Imagens do Site</h2>
+<div class="alerta alerta-info">Cole URLs de imagens (ex: Unsplash, Imgur) ou caminho de arquivos locais.</div>
+<div class="campo"><label>Imagem Hero (topo do site)</label><input type="text" id="f-imgHero"></div>
+<div class="campo"><label>Imagem Sobre</label><input type="text" id="f-imgSobre"></div>
+<div class="campo"><label>Imagem Contato</label><input type="text" id="f-imgContato"></div>
+</div>
+
+<!-- HOME -->
+<div class="painel" id="painel-home">
+<h2>Seção Home (Topo)</h2>
+<div class="campo"><label>Título Principal</label><input type="text" id="f-homeTitulo"></div>
+<div class="campo"><label>Subtítulo</label><input type="text" id="f-homeSubtitulo"></div>
+<div class="campo"><label>Texto do Botão</label><input type="text" id="f-homeBotao"></div>
+</div>
+
+<!-- SOBRE -->
+<div class="painel" id="painel-sobre">
+<h2>Seção Sobre</h2>
+<div class="campo"><label>Título</label><input type="text" id="f-sobreTitulo"></div>
+<div class="campo"><label>Texto</label><textarea id="f-sobreTexto" rows="5"></textarea></div>
+</div>
+
+<!-- ÁREAS -->
+<div class="painel" id="painel-areas">
+<h2>Áreas de Atuação</h2>
+<div class="campo"><label>Título da Seção</label><input type="text" id="f-areasTitulo"></div>
+<div class="separador"></div>
+<div id="lista-areas"></div>
+<button class="btn btn-adicionar" onclick="adicionarArea()">+ Adicionar Área</button>
+</div>
+
+<!-- INFORMATIVO -->
+<div class="painel" id="painel-informativo">
+<h2>Seção Informativo</h2>
+<div class="campo"><label>Título da Seção</label><input type="text" id="f-infoTitulo"></div>
+<div class="campo"><label>Subtítulo</label><input type="text" id="f-infoSubtitulo"></div>
+<div class="separador"></div>
+<h3 style="margin-bottom:1rem;color:#1B3A5C">Itens (Cards de Direitos)</h3>
+<div id="lista-itens-info"></div>
+<button class="btn btn-adicionar" onclick="adicionarItemInfo()">+ Adicionar Item</button>
+<div class="separador"></div>
+<h3 style="margin-bottom:1rem;color:#1B3A5C">Textos Rotativos (frases que aparecem em destaque)</h3>
+<div id="lista-rotativo"></div>
+<button class="btn btn-adicionar" onclick="adicionarRotativo()">+ Adicionar Frase</button>
+</div>
+
+<!-- EQUIPE -->
+<div class="painel" id="painel-equipe">
+<h2>Equipe</h2>
+<div class="campo"><label>Título da Seção</label><input type="text" id="f-equipeTitulo"></div>
+<div class="campo"><label>Subtítulo</label><input type="text" id="f-equipeSubtitulo"></div>
+<div class="separador"></div>
+<div id="lista-advogados"></div>
+<button class="btn btn-adicionar" onclick="adicionarAdvogado()">+ Adicionar Advogado</button>
+</div>
+
+<!-- CONTATO -->
+<div class="painel" id="painel-contato">
+<h2>Informações de Contato</h2>
+<div class="campo"><label>Título da Seção</label><input type="text" id="f-contatoTitulo"></div>
+<div class="campo"><label>Endereço</label><input type="text" id="f-contatoEndereco"></div>
+<div class="campo"><label>Telefone</label><input type="text" id="f-contatoTelefone"></div>
+<div class="campo"><label>E-mail</label><input type="text" id="f-contatoEmail"></div>
+<div class="campo"><label>Horário de Atendimento</label><input type="text" id="f-contatoHorario"></div>
+</div>
+
+<!-- REDES -->
+<div class="painel" id="painel-redes">
+<h2>Redes Sociais</h2>
+<h3 style="margin-bottom:1rem;color:#1B3A5C">WhatsApp</h3>
+<div class="campo"><div class="campo-check"><input type="checkbox" id="f-wppAtivo"><label>Ativar botão flutuante</label></div></div>
+<div class="campo"><label>Número (com código do país, sem +)</label><input type="text" id="f-wppNumero" placeholder="5511999999999"></div>
+<div class="campo"><label>Mensagem padrão</label><input type="text" id="f-wppMensagem"></div>
+<div class="separador"></div>
+<h3 style="margin-bottom:1rem;color:#1B3A5C">Instagram</h3>
+<div class="campo"><div class="campo-check"><input type="checkbox" id="f-instaAtivo"><label>Exibir no rodapé</label></div></div>
+<div class="campo"><label>URL do perfil</label><input type="text" id="f-instaUrl"></div>
+<div class="separador"></div>
+<h3 style="margin-bottom:1rem;color:#1B3A5C">Facebook</h3>
+<div class="campo"><div class="campo-check"><input type="checkbox" id="f-fbAtivo"><label>Exibir no rodapé</label></div></div>
+<div class="campo"><label>URL da página</label><input type="text" id="f-fbUrl"></div>
+<div class="separador"></div>
+<h3 style="margin-bottom:1rem;color:#1B3A5C">LinkedIn</h3>
+<div class="campo"><div class="campo-check"><input type="checkbox" id="f-liAtivo"><label>Exibir no rodapé</label></div></div>
+<div class="campo"><label>URL da empresa</label><input type="text" id="f-liUrl"></div>
+</div>
+
+<!-- FORMULÁRIO -->
+<div class="painel" id="painel-formulario">
+<h2>Formulário de Contato</h2>
+<div class="alerta alerta-info">Crie um formulário gratuito em <a href="https://formspree.io" target="_blank">formspree.io</a> e cole o endpoint abaixo.</div>
+<div class="campo"><label>Endpoint do Formspree</label><input type="text" id="f-endpoint"></div>
+<div class="separador"></div>
+<h3 style="margin-bottom:1rem;color:#1B3A5C">Opções do Select "Área de Interesse"</h3>
+<div id="lista-opcoes"></div>
+<button class="btn btn-adicionar" onclick="adicionarOpcao()">+ Adicionar Opção</button>
+</div>
+
+</div>
+
+<script>
+let cfg = null;
+let dadosTemp = {};
+
+function mudarAba(nome, el) {
+    coletarAbaAtual();
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.painel').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('painel-' + nome).classList.add('active');
+}
+
+function carregarArquivo(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+        try {
+            const texto = ev.target.result;
+            const match = texto.match(/const SITE_CONFIG\s*=\s*(\{[\s\S]*?\});/);
+            if (!match) { alert('Arquivo inválido. Verifique se é o config.js correto.'); return; }
+            cfg = eval('(' + match[1] + ')');
+            popularTudo();
+            document.getElementById('status').textContent = '✅ ' + file.name + ' carregado';
+            document.getElementById('status').className = 'status ok';
+        } catch(err) {
+            alert('Erro ao ler o arquivo: ' + err.message);
+        }
+    };
+    reader.readAsText(file);
+}
+
+function popularTudo() {
+    document.getElementById('f-nome').value = cfg.nome || '';
+    document.getElementById('f-slogan').value = cfg.slogan || '';
+    document.getElementById('f-descricao').value = cfg.descricao || '';
+
+    document.getElementById('f-gradientePrincipal').value = cfg.cores?.gradientePrincipal || '';
+    document.getElementById('f-gradienteDestaque').value = cfg.cores?.gradienteDestaque || '';
+    document.getElementById('f-fundoClaro').value = cfg.cores?.fundoClaro || '';
+    document.getElementById('f-textoEscuro').value = cfg.cores?.textoEscuro || '';
+    document.getElementById('f-textoMedio').value = cfg.cores?.textoMedio || '';
+    document.getElementById('f-textoClaro').value = cfg.cores?.textoClaro || '';
+    try { document.getElementById('c-fundoClaro').value = cfg.cores?.fundoClaro || '#F7F5F0'; } catch(e){}
+    try { document.getElementById('c-textoEscuro').value = cfg.cores?.textoEscuro || '#1B3A5C'; } catch(e){}
+    try { document.getElementById('c-textoMedio').value = cfg.cores?.textoMedio || '#5A6570'; } catch(e){}
+    try { document.getElementById('c-textoClaro').value = cfg.cores?.textoClaro || '#FFFFFF'; } catch(e){}
+
+    document.getElementById('f-imgHero').value = cfg.imagens?.hero || '';
+    document.getElementById('f-imgSobre').value = cfg.imagens?.sobre || '';
+    document.getElementById('f-imgContato').value = cfg.imagens?.contato || '';
+
+    document.getElementById('f-homeTitulo').value = cfg.secoes?.home?.titulo || '';
+    document.getElementById('f-homeSubtitulo').value = cfg.secoes?.home?.subtitulo || '';
+    document.getElementById('f-homeBotao').value = cfg.secoes?.home?.botaoTexto || '';
+
+    document.getElementById('f-sobreTitulo').value = cfg.secoes?.sobre?.titulo || '';
+    document.getElementById('f-sobreTexto').value = cfg.secoes?.sobre?.texto || '';
+
+    document.getElementById('f-areasTitulo').value = cfg.secoes?.areas?.titulo || '';
+    renderAreas();
+
+    document.getElementById('f-infoTitulo').value = cfg.secoes?.informativo?.titulo || '';
+    document.getElementById('f-infoSubtitulo').value = cfg.secoes?.informativo?.subtitulo || '';
+    renderItensInfo();
+    renderRotativo();
+
+    document.getElementById('f-equipeTitulo').value = cfg.equipe?.titulo || '';
+    document.getElementById('f-equipeSubtitulo').value = cfg.equipe?.subtitulo || '';
+    renderAdvogados();
+
+    document.getElementById('f-contatoTitulo').value = cfg.secoes?.contato?.titulo || '';
+    document.getElementById('f-contatoEndereco').value = cfg.secoes?.contato?.endereco || '';
+    document.getElementById('f-contatoTelefone').value = cfg.secoes?.contato?.telefone || '';
+    document.getElementById('f-contatoEmail').value = cfg.secoes?.contato?.email || '';
+    document.getElementById('f-contatoHorario').value = cfg.secoes?.contato?.horario || '';
+
+    document.getElementById('f-wppAtivo').checked = cfg.redesSociais?.whatsapp?.ativo ?? true;
+    document.getElementById('f-wppNumero').value = cfg.redesSociais?.whatsapp?.numero || '';
+    document.getElementById('f-wppMensagem').value = cfg.redesSociais?.whatsapp?.mensagem || '';
+    document.getElementById('f-instaAtivo').checked = cfg.redesSociais?.instagram?.ativo ?? true;
+    document.getElementById('f-instaUrl').value = cfg.redesSociais?.instagram?.url || '';
+    document.getElementById('f-fbAtivo').checked = cfg.redesSociais?.facebook?.ativo ?? true;
+    document.getElementById('f-fbUrl').value = cfg.redesSociais?.facebook?.url || '';
+    document.getElementById('f-liAtivo').checked = cfg.redesSociais?.linkedin?.ativo ?? true;
+    document.getElementById('f-liUrl').value = cfg.redesSociais?.linkedin?.url || '';
+
+    document.getElementById('f-endpoint').value = cfg.formulario?.endpointFormspree || '';
+    renderOpcoes();
+}
+
+function coletarAbaAtual() {
+    if (!cfg) return;
+    cfg.nome = document.getElementById('f-nome').value;
+    cfg.slogan = document.getElementById('f-slogan').value;
+    cfg.descricao = document.getElementById('f-descricao').value;
+
+    cfg.cores = {
+        gradientePrincipal: document.getElementById('f-gradientePrincipal').value,
+        gradienteDestaque: document.getElementById('f-gradienteDestaque').value,
+        fundoClaro: document.getElementById('f-fundoClaro').value,
+        textoEscuro: document.getElementById('f-textoEscuro').value,
+        textoMedio: document.getElementById('f-textoMedio').value,
+        textoClaro: document.getElementById('f-textoClaro').value
+    };
+
+    cfg.imagens = {
+        hero: document.getElementById('f-imgHero').value,
+        sobre: document.getElementById('f-imgSobre').value,
+        contato: document.getElementById('f-imgContato').value
+    };
+
+    cfg.secoes.home = {
+        titulo: document.getElementById('f-homeTitulo').value,
+        subtitulo: document.getElementById('f-homeSubtitulo').value,
+        botaoTexto: document.getElementById('f-homeBotao').value
+    };
+
+    cfg.secoes.sobre = {
+        titulo: document.getElementById('f-sobreTitulo').value,
+        texto: document.getElementById('f-sobreTexto').value
+    };
+
+    cfg.secoes.areas.titulo = document.getElementById('f-areasTitulo').value;
+    cfg.secoes.areas.areas = coletarLista('area');
+
+    cfg.secoes.informativo.titulo = document.getElementById('f-infoTitulo').value;
+    cfg.secoes.informativo.subtitulo = document.getElementById('f-infoSubtitulo').value;
+    cfg.secoes.informativo.itens = coletarLista('itemInfo');
+    cfg.rotativoInformativo = [];
+    document.querySelectorAll('#lista-rotativo .card-item').forEach(c => {
+        cfg.rotativoInformativo.push(c.querySelector('input').value);
+    });
+
+    cfg.equipe.titulo = document.getElementById('f-equipeTitulo').value;
+    cfg.equipe.subtitulo = document.getElementById('f-equipeSubtitulo').value;
+    cfg.equipe.advogados = coletarLista('adv');
+
+    cfg.secoes.contato = {
+        titulo: document.getElementById('f-contatoTitulo').value,
+        endereco: document.getElementById('f-contatoEndereco').value,
+        telefone: document.getElementById('f-contatoTelefone').value,
+        email: document.getElementById('f-contatoEmail').value,
+        horario: document.getElementById('f-contatoHorario').value
+    };
+
+    cfg.redesSociais = {
+        whatsapp: { ativo: document.getElementById('f-wppAtivo').checked, numero: document.getElementById('f-wppNumero').value, mensagem: document.getElementById('f-wppMensagem').value },
+        instagram: { ativo: document.getElementById('f-instaAtivo').checked, url: document.getElementById('f-instaUrl').value },
+        facebook: { ativo: document.getElementById('f-fbAtivo').checked, url: document.getElementById('f-fbUrl').value },
+        linkedin: { ativo: document.getElementById('f-liAtivo').checked, url: document.getElementById('f-liUrl').value }
+    };
+
+    cfg.formulario.endpointFormspree = document.getElementById('f-endpoint').value;
+    const campoAssunto = cfg.formulario.campos.find(c => c.nome === 'assunto');
+    if (campoAssunto) {
+        campoAssunto.opcoes = [];
+        document.querySelectorAll('#lista-opcoes .card-item input').forEach(i => {
+            if (i.value.trim()) campoAssunto.opcoes.push(i.value.trim());
+        });
+    }
+}
+
+function coletarLista(tipo) {
+    const lista = [];
+    document.querySelectorAll('#lista-' + tipo + ' .card-item, #lista-advogados .card-item, #lista-itens-info .card-item').forEach(c => {
+        if (c.closest('[id^="lista-"]').id !== 'lista-' + tipo && 
+            !(tipo === 'adv' && c.closest('#lista-advogados')) &&
+            !(tipo === 'itemInfo' && c.closest('#lista-itens-info'))) return;
+        const item = {};
+        c.querySelectorAll('input, textarea, select').forEach(el => {
+            if (el.dataset.chave) item[el.dataset.chave] = el.value;
+        });
+        if (Object.keys(item).length > 0) lista.push(item);
+    });
+    return lista;
+}
+
+// ÁREAS
+function renderAreas() {
+    const lista = document.getElementById('lista-areas');
+    lista.innerHTML = '';
+    (cfg.secoes?.areas?.areas || []).forEach((a, i) => {
+        lista.appendChild(criarCard('area', i, [
+            {chave:'titulo', label:'Título', valor:a.titulo},
+            {chave:'descricao', label:'Descrição', valor:a.descricao, tipo:'textarea'},
+            {chave:'icone', label:'Ícone (shield, scale, building)', valor:a.icone}
+        ]));
+    });
+}
+function adicionarArea() {
+    cfg.secoes.areas.areas.push({titulo:'', descricao:'', icone:'shield'});
+    renderAreas();
+}
+
+// ITENS INFORMATIVO
+function renderItensInfo() {
+    const lista = document.getElementById('lista-itens-info');
+    lista.innerHTML = '';
+    (cfg.secoes?.informativo?.itens || []).forEach((it, i) => {
+        lista.appendChild(criarCard('itemInfo', i, [
+            {chave:'titulo', label:'Título', valor:it.titulo},
+            {chave:'descricao', label:'Descrição', valor:it.descricao, tipo:'textarea'}
+        ]));
+    });
+}
+function adicionarItemInfo() {
+    cfg.secoes.informativo.itens.push({titulo:'', descricao:''});
+    renderItensInfo();
+}
+
+// ROTATIVO
+function renderRotativo() {
+    const lista = document.getElementById('lista-rotativo');
+    lista.innerHTML = '';
+    (cfg.rotativoInformativo || []).forEach((frase, i) => {
+        const card = document.createElement('div');
+        card.className = 'card-item';
+        card.innerHTML = `<button class="btn btn-remover" onclick="removerRotativo(${i})">Remover</button>
+            <div class="campo"><label>Frase ${i+1}</label><input type="text" value="${escapar(frase)}"></div>`;
+        lista.appendChild(card);
+    });
+}
+function adicionarRotativo() {
+    cfg.rotativoInformativo.push('Nova frase');
+    renderRotativo();
+}
+function removerRotativo(i) {
+    cfg.rotativoInformativo.splice(i, 1);
+    renderRotativo();
+}
+
+// ADVOGADOS
+function renderAdvogados() {
+    const lista = document.getElementById('lista-advogados');
+    lista.innerHTML = '';
+    (cfg.equipe?.advogados || []).forEach((adv, i) => {
+        lista.appendChild(criarCard('adv', i, [
+            {chave:'nome', label:'Nome', valor:adv.nome},
+            {chave:'oab', label:'OAB', valor:adv.oab},
+            {chave:'especialidade', label:'Especialidade', valor:adv.especialidade},
+            {chave:'bio', label:'Biografia', valor:adv.bio, tipo:'textarea'},
+            {chave:'foto', label:'URL da Foto', valor:adv.foto}
+        ]));
+    });
+}
+function adicionarAdvogado() {
+    cfg.equipe.advogados.push({nome:'', oab:'', especialidade:'', bio:'', foto:''});
+    renderAdvogados();
+}
+
+// OPÇÕES DO SELECT
+function renderOpcoes() {
+    const lista = document.getElementById('lista-opcoes');
+    lista.innerHTML = '';
+    const campo = cfg.formulario?.campos?.find(c => c.nome === 'assunto');
+    (campo?.opcoes || []).forEach((op, i) => {
+        const card = document.createElement('div');
+        card.className = 'card-item';
+        card.innerHTML = `<button class="btn btn-remover" onclick="removerOpcao(${i})">Remover</button>
+            <div class="campo"><label>Opção ${i+1}</label><input type="text" value="${escapar(op)}"></div>`;
+        lista.appendChild(card);
+    });
+}
+function adicionarOpcao() {
+    const campo = cfg.formulario.campos.find(c => c.nome === 'assunto');
+    if (campo) { campo.opcoes.push('Nova opção'); renderOpcoes(); }
+}
+function removerOpcao(i) {
+    const campo = cfg.formulario.campos.find(c => c.nome === 'assunto');
+    if (campo) { campo.opcoes.splice(i, 1); renderOpcoes(); }
+}
+
+// UTILITÁRIOS
+function criarCard(tipo, i, campos) {
+    const card = document.createElement('div');
+    card.className = 'card-item';
+    let html = `<button class="btn btn-remover" onclick="removerItem('${tipo}',${i})">Remover</button>`;
+    html += `<h3>Item ${i+1}</h3>`;
+    campos.forEach(c => {
+        if (c.tipo === 'textarea') {
+            html += `<div class="campo"><label>${c.label}</label><textarea data-chave="${c.chave}">${escapar(c.valor||'')}</textarea></div>`;
+        } else {
+            html += `<div class="campo"><label>${c.label}</label><input type="text" data-chave="${c.chave}" value="${escapar(c.valor||'')}"></div>`;
+        }
+    });
+    card.innerHTML = html;
+    return card;
+}
+
+function removerItem(tipo, i) {
+    if (tipo === 'area') { cfg.secoes.areas.areas.splice(i,1); renderAreas(); }
+    if (tipo === 'itemInfo') { cfg.secoes.informativo.itens.splice(i,1); renderItensInfo(); }
+    if (tipo === 'adv') { cfg.equipe.advogados.splice(i,1); renderAdvogados(); }
+}
+
+function escapar(s) {
+    return String(s||'').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function gerarJS() {
+    coletarAbaAtual();
+    let js = 'const SITE_CONFIG = ' + JSON.stringify(cfg, null, 4) + ';\n';
+    js += 'window.SITE_CONFIG = SITE_CONFIG;\n';
+    return js;
+}
+
+async function salvarArquivo() {
+    if (!cfg) { alert('Carregue o config.js primeiro!'); return; }
+
+    const conteudo = gerarJS();
+
+    if ('showSaveFilePicker' in window) {
+        try {
+            const handle = await window.showSaveFilePicker({
+                suggestedName: 'config.js',
+                types: [{ description: 'JavaScript', accept: {'text/javascript': ['.js']} }]
+            });
+            const w = await handle.createWritable();
+            await w.write(conteudo);
+            await w.close();
+            alert('✅ Salvo com sucesso!\n\nAgora execute o "atualizar-github.bat" para publicar.');
+        } catch(e) {
+            if (e.name !== 'AbortError') alert('Erro: ' + e.message);
+        }
+    } else {
+        const blob = new Blob([conteudo], {type:'text/javascript'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'config.js';
+        a.click();
+        alert('⚠️ Seu navegador não permite salvar direto.\n\nO arquivo foi baixado. Substitua o config.js original manualmente e execute o "atualizar-github.bat".');
+    }
+}
+</script>
+</body>
+</html>
