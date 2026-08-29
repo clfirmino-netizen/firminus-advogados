@@ -1,4 +1,4 @@
-﻿const SITE_CONFIG = {
+const SITE_CONFIG = {
     "nome": "Silva & Firmino Advogados",
     "slogan": "Excelencia juridica com compromisso e dedicacao",
     "descricao": "Escritorio de advocacia especializado em solucoes juridicas personalizadas, com atuacao etica e transparente.",
@@ -39,14 +39,14 @@
         "subtitulo": "Profissionais dedicados a defender seus direitos",
         "advogados": [
             {
-                "nome": "Dr. Firminus Silva",
+                "nome": "Dr. Wilson Silva",
                 "oab": "OAB/SP 123.456",
                 "especialidade": "Direito do Consumidor",
                 "bio": "Especialista em defesa do consumidor com mais de 15 anos de experiencia em acoes coletivas e individuais.",
                 "foto": "imagens/advogado1.jpg"
             },
             {
-                "nome": "Dra. Ana Costa",
+                "nome": "Dra. Claudio Firmino",
                 "oab": "OAB/SP 234.567",
                 "especialidade": "Direito Civil",
                 "bio": "Atuacao em contratos, responsabilidade civil e direito de familia, com abordagem humanizada.",
@@ -114,38 +114,7 @@
         },
         "areas": {
             "titulo": "Areas de Atuacao",
-            "areas": [
-        {
-            "titulo": "Direito Criminal",
-            "descricao": "Defesa tecnica em processos criminais, atuacao em audiencias, recursos e acompanhamento completo em todas as fases do processo penal.",
-            "icone": "shield"
-        },
-        {
-            "titulo": "Direito Civil",
-            "descricao": "Assessoria em contratos, responsabilidade civil, indenizacoes, cobrancas e resolucao de conflitos patrimoniais com seguranca juridica.",
-            "icone": "scale"
-        },
-        {
-            "titulo": "Direito do Consumidor",
-            "descricao": "Protecao contra praticas abusivas, defeitos de produtos, cobrancas indevidas e defesa dos seus direitos nas relacoes de consumo.",
-            "icone": "shield"
-        },
-        {
-            "titulo": "Direito Trabalhista",
-            "descricao": "Defesa de direitos trabalhistas, rescisoes, horas extras, assedio moral, acidentes de trabalho e negociacoes com empregadores.",
-            "icone": "building"
-        },
-        {
-            "titulo": "Direito Previdenciario",
-            "descricao": "Aposentadorias, pensoes, auxilios por incapacidade, revisoes de beneficios e planejamento previdenciario para garantir seu futuro.",
-            "icone": "scale"
-        },
-        {
-            "titulo": "Familia e Sucessoes",
-            "descricao": "Divorcios, guarda de filhos, pensao alimenticia, inventarios, testamentos e partilha de bens com sensibilidade e discrição.",
-            "icone": "scale"
-        }
-    ]
+            "areas": []
         },
         "informativo": {
             "titulo": "Seus Direitos",
