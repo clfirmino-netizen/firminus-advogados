@@ -1,47 +1,71 @@
 @echo off
 chcp 65001 >nul
-title Atualizar Site no GitHub
+title Atualizar GitHub - Firminus Advogados
+
 echo ============================================
 echo  ENVIAR ATUALIZACOES PARA O GITHUB
 echo ============================================
+echo.
 
-where git >nul 2>nul
+REM Verifica se há alterações
+git status --porcelain >nul 2>&1
 if %errorlevel% neq 0 (
-    echo [ERRO] Git nao esta instalado.
-    echo Baixe em: https://git-scm.com/download/win
+    echo [ERRO] Git não está configurado.
     pause
-    exit /b
+    exit /b 1
 )
 
-if not exist ".git" (
-    echo [ERRO] Esta pasta ainda nao e um repositorio Git.
-    echo Execute primeiro o "configurar-github.bat".
+REM Verifica se há arquivos para commit
+git status --porcelain | findstr . >nul
+if %errorlevel% neq 0 (
+    echo [INFO] Nenhuma alteração detectada.
+    echo Tudo já está atualizado no GitHub.
+    echo.
     pause
-    exit /b
+    exit /b 0
+)
+
+echo Adicionando arquivos alterados...
+git add .
+if %errorlevel% neq 0 (
+    echo [ERRO] Falha ao adicionar arquivos.
+    pause
+    exit /b 1
 )
 
 echo.
-echo Adicionando arquivos alterados...
-git add .
+set /p mensagem="Mensagem da atualizacao (ex: alterei o nome do escritorio): "
 
+if "%mensagem%"=="" (
+    set mensagem="Atualizacao automatica"
+)
+
+echo.
 echo Registrando as mudancas...
-set /p msg="Mensagem da atualizacao (ex: alterei o nome do escritorio): "
-if "%msg%"=="" set msg=Atualizacao do site
-
-git commit -m "%msg%"
+git commit -m "%mensagem%"
+if %errorlevel% neq 0 (
+    echo [ERRO] Falha ao fazer commit.
+    pause
+    exit /b 1
+)
 
 echo.
 echo Enviando para o GitHub...
-git push origin main
-
-if %errorlevel% equ 0 (
+git push
+if %errorlevel% neq 0 (
     echo.
-    echo ============================================
-    echo  ATUALIZACAO ENVIADA COM SUCESSO!
-    echo  O site estara no ar em 1-2 minutos.
-    echo ============================================
-) else (
-    echo.
-    echo [AVISO] Falha ao enviar. Verifique conexao e repositorio.
+    echo [ERRO] Falha no push. Verifique suas credenciais.
+    echo Se precisar de um token, acesse:
+    echo https://github.com/settings/tokens
+    pause
+    exit /b 1
 )
+
+echo.
+echo ============================================
+echo  ATUALIZACAO CONCLUIDA COM SUCESSO!
+echo ============================================
+echo.
+echo Seus arquivos foram enviados para o GitHub.
+echo.
 pause
