@@ -80,12 +80,7 @@
                 "label": "Area de interesse",
                 "tipo": "select",
                 "obrigatorio": true,
-                "opcoes": [
-                    "Direito do Consumidor",
-                    "Direito Civil",
-                    "Direito Empresarial",
-                    "Outro"
-                ]
+                "opcoes": [ "Direito Criminal", "Direito Civil", "Direito do Consumidor", "Direito Trabalhista", "Direito Previdenciario", "Outro" ]
             },
             {
                 "nome": "mensagem",
@@ -95,12 +90,12 @@
             }
         ]
     },
-    "rotativoInformativo": [
-        "Defesa do Consumidor",
+        "rotativoInformativo": [
+        "Direito Criminal",
         "Direito Civil",
-        "Direito Empresarial",
-        "Contratos e Negocios",
-        "Protecao dos seus Direitos"
+        "Direito do Consumidor",
+        "Direito Trabalhista",
+        "Direito Previdenciario"
     ],
     "secoes": {
         "home": {
@@ -112,10 +107,7 @@
             "titulo": "Sobre Silva&Firmino",
             "texto": "Nascemos com o proposito de oferecer servicos juridicos de alta qualidade, pautados pela etica, transparencia e compromisso com os resultados."
         },
-        "areas": {
-            "titulo": "Areas de Atuacao",
-            "areas": [ { "titulo": "Direito Criminal", "descricao": "Defesa tecnica em processos criminais, atuacao em audiencias, recursos e acompanhamento completo em todas as fases do processo penal.", "icone": "shield" }, { "titulo": "Direito Civil", "descricao": "Assessoria em contratos, responsabilidade civil, indenizacoes, cobrancas e resolucao de conflitos patrimoniais com seguranca juridica.", "icone": "scale" }, { "titulo": "Direito do Consumidor", "descricao": "Protecao contra praticas abusivas, defeitos de produtos, cobrancas indevidas e defesa dos seus direitos nas relacoes de consumo.", "icone": "shield" }, { "titulo": "Direito Trabalhista", "descricao": "Defesa de direitos trabalhistas, rescisoes, horas extras, assedio moral, acidentes de trabalho e negociacoes com empregadores.", "icone": "building" }, { "titulo": "Direito Previdenciario", "descricao": "Aposentadorias, pensoes, auxilios por incapacidade, revisoes de beneficios e planejamento previdenciario para garantir seu futuro.", "icone": "scale" } ]
-        },
+        "areas": window.SITE_AREAS,
         "informativo": {
             "titulo": "Seus Direitos",
             "subtitulo": "Conheca seus direitos e saiba como protege-los",
