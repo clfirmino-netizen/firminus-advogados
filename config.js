@@ -1,4 +1,4 @@
-const SITE_CONFIG = {
+﻿const SITE_CONFIG = {
     "nome": "Silva & Firmino Advogados",
     "slogan": "Excelencia juridica com compromisso e dedicacao",
     "descricao": "Escritorio de advocacia especializado em solucoes juridicas personalizadas, com atuacao etica e transparente.",
@@ -114,7 +114,7 @@ const SITE_CONFIG = {
         },
         "areas": {
             "titulo": "Areas de Atuacao",
-            "areas": []
+            "areas": [ { "titulo": "Direito do Consumidor", "descricao": "Defesa dos seus direitos nas relacoes de consumo, com atuacao em casos de produtos defeituosos, cobrancas indevidas e praticas abusivas.", "icone": "shield" }, { "titulo": "Direito Civil", "descricao": "Assessoria completa em contratos, responsabilidade civil, direito de familia e sucessoes.", "icone": "scale" }, { "titulo": "Direito Empresarial", "descricao": "Suporte juridico para empresas, desde a constituicao societaria ate a resolucao de conflitos comerciais.", "icone": "building" } ]
         },
         "informativo": {
             "titulo": "Seus Direitos",
