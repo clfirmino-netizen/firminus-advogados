@@ -77,7 +77,6 @@ ul{margin-left:20px;margin-bottom:15px}
 <li>Portabilidade a outro fornecedor de serviço</li>
 <li>Eliminação dos dados tratados com consentimento</li>
 <li>Informação sobre compartilhamento com terceiros</li>
-<li>Informação sobre a possibilidade de não fornecer consentimento e as consequências da negativa</li>
 <li>Revogação do consentimento</li>
 </ul>
 
@@ -92,11 +91,9 @@ ul{margin-left:20px;margin-bottom:15px}
 <li>Envolvimento de <strong>correspondentes</strong> (outros advogados em outras comarcas) ou <strong>peritos</strong>, quando necessário para o atendimento jurídico</li>
 </ul>
 <p>Em todos os casos, os terceiros estão obrigados a observar a LGPD e as normas de sigilo profissional.</p>
-<p>Os dados enviados pelo formulário de contato são processados pelo <strong>Formspree</strong>, que atua como operador de dados, exclusivamente para o encaminhamento das mensagens ao e-mail do escritório.</p>
 
 <h2>8. Transferência internacional de dados</h2>
 <p>Este site é hospedado no <strong>GitHub Pages</strong> (Estados Unidos). Portanto, há transferência internacional de dados (IP, logs de acesso). O GitHub Inc. adota garantias contratuais padrão (Standard Contractual Clauses) e está em conformidade com o GDPR e a LGPD, conforme sua <a href="https://docs.github.com/pt/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" style="color:#c9a227">Política de Privacidade</a>.</p>
-<p>Os dados do formulário de contato também são processados pelo <strong>Formspree</strong> (Estados Unidos), operador que adota medidas adequadas de proteção de dados pessoais.</p>
 
 <h2>9. Canal do titular</h2>
 <p>Para exercer seus direitos ou esclarecer dúvidas sobre esta Política, entre em contato:</p>

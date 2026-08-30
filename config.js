@@ -1,4 +1,4 @@
-const SITE_CONFIG = {
+﻿const SITE_CONFIG = {
     "nome": "Silva & Firmino Advogados",
     "slogan": "Excelência jurídica com compromisso e dedicação",
     "descricao": "Escritório de advocacia especializado em soluções jurídicas personalizadas, com atuação ética e transparente.",
@@ -96,6 +96,12 @@ const SITE_CONFIG = {
                 "obrigatorio": true
             }
         ]
+    },
+    "lgpd": {
+        "cnpj": "00.000.000/0001-00",
+        "oab": "OAB/SP 000.000",
+
+        "email": "privacidade@firminus.adv.br"
     },
     "rotativoInformativo": [
         "Direito Criminal",

@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Cookies | Silva & Firmino Advogados</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<script src="config.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;line-height:1.7;color:#2c3e50;background:#f8f9fa}
+.container{max-width:900px;margin:0 auto;padding:40px 20px;background:#fff;min-height:100vh}
+h1{color:#1a365d;font-size:2rem;margin-bottom:10px;border-bottom:3px solid #c9a227;padding-bottom:10px}
+h2{color:#1a365d;font-size:1.3rem;margin:30px 0 10px}
+p,li{margin-bottom:12px;text-align:justify}
+ul{margin-left:20px;margin-bottom:15px}
+table{width:100%;border-collapse:collapse;margin:15px 0}
+th,td{border:1px solid #ddd;padding:10px;text-align:left;font-size:0.9rem}
+th{background:#1a365d;color:#fff}
+.meta{color:#666;font-size:0.9rem;margin-bottom:30px}
+.back{display:inline-block;margin-top:30px;padding:10px 20px;background:#1a365d;color:#fff;text-decoration:none;border-radius:4px}
+.back:hover{background:#c9a227}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Política de Cookies</h1>
+<p class="meta">Última atualização: 29 de agosto de 2026</p>
+
+<p>Esta Política de Cookies explica como o <strong id="cookies-nome">Silva & Firmino Advogados</strong> utiliza cookies e tecnologias similares em seu site, em conformidade com a LGPD (Lei nº 13.709/2018).</p>
+
+<h2>1. O que são cookies</h2>
+<p>Cookies são pequenos arquivos de texto armazenados no seu dispositivo (computador, celular, tablet) quando você acessa um site. Eles permitem que o site reconheça o dispositivo e lembre preferências durante a navegação.</p>
+
+<h2>2. Tipos de cookies que utilizamos</h2>
+<table>
+<tr><th>Cookie</th><th>Tipo</th><th>Finalidade</th><th>Duração</th></tr>
+<tr><td>Consentimento LGPD</td><td>Técnico (localStorage)</td><td>Registrar sua escolha sobre o banner de privacidade</td><td>Persistente (até limpeza do navegador)</td></tr>
+<tr><td>Sessão</td><td>Técnico</td><td>Manter o funcionamento básico do site</td><td>Sessão</td></tr>
+</table>
+<p><strong>Não utilizamos</strong> cookies de marketing, rastreamento, publicidade de terceiros ou análise de comportamento.</p>
+
+<h2>3. Finalidades</h2>
+<p>Os cookies técnicos são utilizados exclusivamente para:</p>
+<ul>
+<li>Garantir o funcionamento correto do site</li>
+<li>Lembrar sua preferência de consentimento (não exibir o banner repetidamente)</li>
+<li>Garantir a segurança da navegação</li>
+</ul>
+
+<h2>4. Base legal</h2>
+<p>Os cookies técnicos essenciais são tratados com base no <strong>legítimo interesse</strong> (art. 7º, IX, LGPD), pois são indispensáveis ao funcionamento do site. O registro do consentimento do banner é feito via localStorage, que não coleta dados pessoais.</p>
+
+<h2>5. Como gerenciar cookies</h2>
+<p>Você pode configurar seu navegador para bloquear ou apagar cookies a qualquer momento:</p>
+<ul>
+<li><strong>Google Chrome:</strong> Configurações → Privacidade e segurança → Cookies</li>
+<li><strong>Mozilla Firefox:</strong> Opções → Privacidade e Segurança → Cookies e dados de sites</li>
+<li><strong>Safari:</strong> Preferências → Privacidade → Cookies e dados de sites</li>
+<li><strong>Microsoft Edge:</strong> Configurações → Cookies e permissões do site</li>
+</ul>
+<p>O bloqueio de cookies técnicos pode afetar o funcionamento de algumas funcionalidades do site.</p>
+
+<h2>6. Alterações nesta Política</h2>
+<p>Esta Política pode ser atualizada. A data da última versão consta no topo.</p>
+
+<h2>7. Contato</h2>
+<p>Para dúvidas sobre esta Política de Cookies, entre em contato:</p>
+<ul>
+<li><strong>E-mail:</strong> <span id="cookies-email">privacidade@firminus.adv.br</span></li>
+<li><strong>Endereço:</strong> <span id="cookies-endereco">Rua Jean de Lahuerta, 808 — São Paulo/SP</span></li>
+</ul>
+
+<a href="index.html" class="back">← Voltar ao site</a>
+</div>
+
+<script>
+(function(){
+  var cfg = (window.SITE_CONFIG || {});
+  var lgpd = cfg.lgpd || {};
+  var contato = (cfg.secoes && cfg.secoes.contato) || {};
+  var nome = cfg.nome || 'Silva & Firmino Advogados';
+  document.title = 'Política de Cookies | ' + nome;
+  function set(id, val){
+    var el = document.getElementById(id);
+    if (el && val) el.textContent = val;
+  }
+  set('cookies-nome', nome);
+  set('cookies-email', lgpd.email);
+  set('cookies-endereco', contato.endereco);
+})();
+</script>
+</body>
+</html>

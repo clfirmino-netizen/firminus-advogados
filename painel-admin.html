@@ -86,6 +86,7 @@ body{font-family:'Segoe UI',sans-serif;background:#f0f2f5;color:#333;line-height
 <div class="tab" onclick="mudarAba('equipe',this)">Equipe</div>
 <div class="tab" onclick="mudarAba('contato',this)">Contato</div>
 <div class="tab" onclick="mudarAba('redes',this)">Redes Sociais</div>
+<div class="tab" onclick="mudarAba('lgpd',this)">LGPD</div>
 <div class="tab" onclick="mudarAba('formulario',this)">Formulário</div>
 </div>
 
@@ -196,6 +197,18 @@ body{font-family:'Segoe UI',sans-serif;background:#f0f2f5;color:#333;line-height
 <h3 style="margin-bottom:1rem;color:#1B3A5C">LinkedIn</h3>
 <div class="campo"><div class="campo-check"><input type="checkbox" id="f-liAtivo"><label>Exibir no rodapé</label></div></div>
 <div class="campo"><label>URL da empresa</label><input type="text" id="f-liUrl"></div>
+</div>
+
+<!-- LGPD -->
+<div class="painel" id="painel-lgpd">
+<h2>Dados LGPD (Política de Privacidade)</h2>
+<div class="alerta alerta-info">Dados do controlador (Lei nº 13.709/2018). Nome e endereço são reutilizados das seções "Configurações Gerais" e "Contato".</div>
+<div class="campo"><label>Nome do Escritório (identificação)</label><input type="text" id="f-lgpdNome" readonly></div>
+<div class="campo"><label>CNPJ</label><input type="text" id="f-lgpdCnpj" placeholder="00.000.000/0001-00"></div>
+<div class="campo"><label>OAB — inscrição na Ordem</label><input type="text" id="f-lgpdOab" placeholder="OAB/SP 000.000"></div>
+
+<div class="campo"><label>E-mail de privacidade (contato LGPD/DPO)</label><input type="text" id="f-lgpdEmail" placeholder="privacidade@..."></div>
+<div class="campo"><label>Endereço (reutilizado de Contato)</label><input type="text" id="f-lgpdEndereco" readonly></div>
 </div>
 
 <!-- FORMULÁRIO -->
@@ -363,6 +376,12 @@ function popularTudo() {
     document.getElementById('f-liUrl').value = cfg.redesSociais?.linkedin?.url || '';
 
     document.getElementById('f-endpoint').value = cfg.formulario?.endpointFormspree || '';
+
+    document.getElementById('f-lgpdNome').value = cfg.nome || '';
+    document.getElementById('f-lgpdCnpj').value = cfg.lgpd?.cnpj || '';
+    document.getElementById('f-lgpdOab').value = cfg.lgpd?.oab || '';
+    document.getElementById('f-lgpdEmail').value = cfg.lgpd?.email || '';
+    document.getElementById('f-lgpdEndereco').value = cfg.secoes?.contato?.endereco || '';
     renderOpcoes();
 }
 
@@ -428,6 +447,12 @@ function coletarAbaAtual() {
     };
 
     cfg.formulario.endpointFormspree = document.getElementById('f-endpoint').value;
+
+    cfg.lgpd = {
+        cnpj: document.getElementById('f-lgpdCnpj').value,
+        oab: document.getElementById('f-lgpdOab').value,
+        email: document.getElementById('f-lgpdEmail').value
+    };
     const campoAssunto = cfg.formulario.campos.find(c => c.nome === 'assunto');
     if (campoAssunto) {
         campoAssunto.opcoes = [];

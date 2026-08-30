@@ -1,9 +1,11 @@
 ﻿(function(){
-  const KEY = 'lgpd_consent';
-  const consent = localStorage.getItem(KEY);
-  if (consent) return;
+  var KEY = 'lgpd_consent';
+  try {
+    var consent = localStorage.getItem(KEY);
+    if (consent) return;
+  } catch (e) { /* localStorage indisponivel, exibe banner */ }
 
-  const banner = document.createElement('div');
+  var banner = document.createElement('div');
   banner.id = 'lgpd-banner';
   banner.innerHTML = `
     <style>
@@ -17,19 +19,29 @@
       @media(max-width:600px){#lgpd-banner .wrap{flex-direction:column;align-items:stretch}#lgpd-banner button{width:100%}}
     </style>
     <div class="wrap">
-      <p>Utilizamos cookies técnicos essenciais para o funcionamento do site. Ao continuar, você concorda com nossa <a href="privacidade.html">Política de Privacidade</a>, em conformidade com a LGPD (Lei 13.709/2018).</p>
+      <p>Utilizamos cookies técnicos essenciais para o funcionamento do site. Ao continuar, você concorda com nossa <a href="privacidade.html" target="_blank">Política de Privacidade</a>, com os <a href="termos.html" target="_blank">Termos de Uso</a> e com a <a href="cookies.html" target="_blank">Política de Cookies</a>, em conformidade com a LGPD (Lei 13.709/2018).</p>
       <button class="aceitar" id="lgpd-ok">Aceitar</button>
       <button class="recusar" id="lgpd-no">Recusar</button>
     </div>
   `;
   document.body.appendChild(banner);
 
-  document.getElementById('lgpd-ok').addEventListener('click', () => {
-    localStorage.setItem(KEY, 'accepted');
+  function registrar(valor){
+    try {
+      var registro = {
+        valor: valor,
+        data: new Date().toISOString(),
+        pagina: window.location.href
+      };
+      localStorage.setItem(KEY, JSON.stringify(registro));
+    } catch (e) { /* armazenamento indisponivel */ }
     banner.remove();
+  }
+
+  document.getElementById('lgpd-ok').addEventListener('click', function(){
+    registrar('accepted');
   });
-  document.getElementById('lgpd-no').addEventListener('click', () => {
-    localStorage.setItem(KEY, 'declined');
-    banner.remove();
+  document.getElementById('lgpd-no').addEventListener('click', function(){
+    registrar('declined');
   });
 })();
