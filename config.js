@@ -3,8 +3,8 @@ const SITE_CONFIG = {
     "slogan": "Excelência jurídica com compromisso e dedicação",
     "descricao": "Escritório de advocacia especializado em soluções jurídicas personalizadas, com atuação ética e transparente.",
     "cores": {
-        "gradientePrincipal": "linear-gradient(135deg, #0B3D2E 0%, #1E7A5A 50%, #2D9B6E 100%)",
-        "gradienteDestaque": "linear-gradient(135deg, #B87333 0%, #C68444 50%, #D4945A 100%)",
+        "gradientePrincipal": "linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2D2D2D 100%)",
+        "gradienteDestaque": "linear-gradient(135deg, #B45309 0%, #D97706 50%, #F59E0B 100%)",
         "fundoClaro": "#F7F5F0",
         "textoEscuro": "#1B3A5C",
         "textoMedio": "#5A6570",
