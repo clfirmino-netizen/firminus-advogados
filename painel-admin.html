@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -46,6 +46,7 @@ body{font-family:'Segoe UI',sans-serif;background:#f0f2f5;color:#333;line-height
 .cor-linha{display:flex;gap:1rem;align-items:center}
 .cor-linha input[type=color]{width:60px;height:40px;border:2px solid #ddd;border-radius:8px;cursor:pointer;padding:2px}
 .cor-linha input[type=text]{flex:1}
+.preset-grupo{margin:1rem 0 1.5rem}.preset-grupo>.titulo{font-size:.85rem;font-weight:600;color:#5A6570;margin-bottom:.5rem}.preset-grid{display:flex;flex-wrap:wrap;gap:.6rem}.preset-card{width:56px;height:40px;border-radius:8px;cursor:pointer;border:3px solid #e0e0e0;transition:all .2s}.preset-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.25)}.preset-card.selecionado{border-color:#C9A24B;box-shadow:0 0 0 2px rgba(201,162,75,.4)}
 </style>
 </head>
 <body>
@@ -104,6 +105,7 @@ body{font-family:'Segoe UI',sans-serif;background:#f0f2f5;color:#333;line-height
 <div class="alerta alerta-info">As cores em formato de texto podem ser editadas diretamente. Gradientes usam o formato <code>linear-gradient(...)</code>.</div>
 <div class="campo"><label>Gradiente Principal</label><input type="text" id="f-gradientePrincipal"></div>
 <div class="campo"><label>Gradiente de Destaque</label><input type="text" id="f-gradienteDestaque"></div>
+<div class="preset-grupo"><div class="titulo">Presets - Gradiente Principal (clique para aplicar)</div><div class="preset-grid" id="presets-principal"></div></div><div class="preset-grupo"><div class="titulo">Presets - Gradiente de Destaque (clique para aplicar)</div><div class="preset-grid" id="presets-destaque"></div></div>
 <div class="campo"><label>Fundo Claro</label><div class="cor-linha"><input type="color" id="c-fundoClaro" onchange="document.getElementById('f-fundoClaro').value=this.value"><input type="text" id="f-fundoClaro"></div></div>
 <div class="campo"><label>Texto Escuro</label><div class="cor-linha"><input type="color" id="c-textoEscuro" onchange="document.getElementById('f-textoEscuro').value=this.value"><input type="text" id="f-textoEscuro"></div></div>
 <div class="campo"><label>Texto Médio</label><div class="cor-linha"><input type="color" id="c-textoMedio" onchange="document.getElementById('f-textoMedio').value=this.value"><input type="text" id="f-textoMedio"></div></div>
@@ -383,6 +385,7 @@ function popularTudo() {
     document.getElementById('f-lgpdEmail').value = cfg.lgpd?.email || '';
     document.getElementById('f-lgpdEndereco').value = cfg.secoes?.contato?.endereco || '';
     renderOpcoes();
+    destacarPresetAtual();
 }
 
 function coletarAbaAtual() {
@@ -566,11 +569,13 @@ function renderOpcoes() {
 }
 function adicionarOpcao() {
     const campo = cfg.formulario.campos.find(c => c.nome === 'assunto');
-    if (campo) { campo.opcoes.push('Nova opção'); renderOpcoes(); }
+    if (campo) { campo.opcoes.push('Nova opção'); renderOpcoes();
+    destacarPresetAtual(); }
 }
 function removerOpcao(i) {
     const campo = cfg.formulario.campos.find(c => c.nome === 'assunto');
-    if (campo) { campo.opcoes.splice(i, 1); renderOpcoes(); }
+    if (campo) { campo.opcoes.splice(i, 1); renderOpcoes();
+    destacarPresetAtual(); }
 }
 
 // UTILITÁRIOS
@@ -638,6 +643,7 @@ async function salvarArquivo() {
         alert('⚠️ Seu navegador não permite salvar direto.\n\nO arquivo foi baixado. Substitua o config.js original manualmente e execute o "atualizar-github.bat".');
     }
 }
+const PRESETS_GRADIENTE={principal:[{nome:"Classico",css:"linear-gradient(135deg, #0A1A2F 0%, #1B3A5C 50%, #274B6D 100%)"},{nome:"Grafite",css:"linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #3a3a3a 100%)"},{nome:"Esmeralda",css:"linear-gradient(135deg, #0B3D2E 0%, #1E7A5A 50%, #2D9B6E 100%)"},{nome:"Vinho",css:"linear-gradient(135deg, #4A0E1C 0%, #7A1E33 50%, #8F2A42 100%)"},{nome:"Petroleo",css:"linear-gradient(135deg, #0F3D4D 0%, #167D8F 50%, #1A95A8 100%)"},{nome:"Slate",css:"linear-gradient(135deg, #1E293B 0%, #334155 50%, #3B5B7A 100%)"},{nome:"Navy+Teal",css:"linear-gradient(135deg, #0A1A2F 0%, #0F766E 50%, #14958A 100%)"},{nome:"Preto+Dourado",css:"linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2D2D2D 100%)"}],destaque:[{nome:"Dourado",css:"linear-gradient(135deg, #C9A24B 0%, #D4B35F 50%, #E8C877 100%)"},{nome:"Cobre",css:"linear-gradient(135deg, #B87333 0%, #C68444 50%, #D4945A 100%)"},{nome:"Ambar",css:"linear-gradient(135deg, #B45309 0%, #D97706 50%, #F59E0B 100%)"},{nome:"Rose Gold",css:"linear-gradient(135deg, #B76E79 0%, #D09A9F 50%, #E8C4C4 100%)"},{nome:"Oliva",css:"linear-gradient(135deg, #6B7D3A 0%, #879E53 50%, #A3B86C 100%)"},{nome:"Laranja",css:"linear-gradient(135deg, #C05621 0%, #D97706 50%, #ED8936 100%)"},{nome:"Bordo",css:"linear-gradient(135deg, #7A1E33 0%, #A02C46 50%, #C53A5A 100%)"},{nome:"Azul Royal",css:"linear-gradient(135deg, #1E40AF 0%, #2563EB 50%, #3B82F6 100%)"}]};function renderPresets(){["principal","destaque"].forEach(function(tipo){var cont=document.getElementById("presets-"+tipo);if(!cont)return;cont.innerHTML="";PRESETS_GRADIENTE[tipo].forEach(function(p){var card=document.createElement("div");card.className="preset-card";card.style.background=p.css;card.title=p.nome;card.setAttribute("data-css",p.css);card.onclick=function(){aplicarPreset(tipo,p.css,card)};cont.appendChild(card)});});destacarPresetAtual();}function aplicarPreset(tipo,css,card){var inputId=tipo==="principal"?"f-gradientePrincipal":"f-gradienteDestaque";var input=document.getElementById(inputId);if(!input)return;input.value=css;coletarAbaAtual();var cont=document.getElementById("presets-"+tipo);if(cont){cont.querySelectorAll(".preset-card").forEach(function(c){c.classList.remove("selecionado")});}if(card)card.classList.add("selecionado");}function destacarPresetAtual(){["principal","destaque"].forEach(function(tipo){var inputId=tipo==="principal"?"f-gradientePrincipal":"f-gradienteDestaque";var input=document.getElementById(inputId);var cont=document.getElementById("presets-"+tipo);if(!input||!cont)return;var val=(input.value||"").trim();cont.querySelectorAll(".preset-card").forEach(function(c){if(val&&c.getAttribute("data-css")===val)c.classList.add("selecionado");else c.classList.remove("selecionado");});});}renderPresets();
 </script>
 </body>
 </html>

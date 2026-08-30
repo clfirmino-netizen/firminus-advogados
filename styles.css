@@ -6,13 +6,14 @@
     --texto-escuro: #1B3A5C;
     --texto-medio: #5A6570;
     --texto-claro: #FFFFFF;
+    --header-bg: rgba(10,26,47,0.95);
     --sombra: 0 4px 20px rgba(0,0,0,0.1);
     --transicao: all 0.3s ease;
 }
 body { font-family: 'Inter', sans-serif; color: var(--texto-escuro); background: var(--fundo-claro); line-height: 1.6; overflow-x: hidden; }
 h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 600; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; }
-.header { position: fixed; top: 0; width: 100%; background: rgba(10,26,47,0.95); backdrop-filter: blur(10px); z-index: 1000; transition: var(--transicao); }
+.header { position: fixed; top: 0; width: 100%; background: var(--header-bg); backdrop-filter: blur(10px); z-index: 1000; transition: var(--transicao); }
 .nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2rem; max-width: 1200px; margin: 0 auto; }
 .logo-text { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; background: var(--gradiente-destaque); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 .nav-menu { display: flex; list-style: none; gap: 2.5rem; }

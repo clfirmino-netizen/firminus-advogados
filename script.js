@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const config = window.SITE_CONFIG;
     aplicarIdentidade(config);
+    aplicarCores(config);
     aplicarSecoes(config);
     aplicarEquipe(config);
     aplicarFormulario(config);
@@ -200,4 +201,24 @@ function inicializarMenu() {
     document.querySelectorAll('.nav-menu a').forEach(function (link) {
         link.addEventListener('click', function () { menu.classList.remove('active'); });
     });
+}
+function aplicarCores(config) {
+    var c = config.cores || {};
+    var root = document.documentElement;
+    if (c.gradientePrincipal) {
+        root.style.setProperty('--gradiente-principal', c.gradientePrincipal);
+        var match = c.gradientePrincipal.match(/#[0-9A-Fa-f]{6}/);
+        if (match) {
+            var hex = match[0];
+            var r = parseInt(hex.substr(1,2), 16);
+            var g = parseInt(hex.substr(3,2), 16);
+            var b = parseInt(hex.substr(5,2), 16);
+            root.style.setProperty('--header-bg', 'rgba(' + r + ',' + g + ',' + b + ',0.95)');
+        }
+    }
+    if (c.gradienteDestaque) root.style.setProperty('--gradiente-destaque', c.gradienteDestaque);
+    if (c.fundoClaro) root.style.setProperty('--fundo-claro', c.fundoClaro);
+    if (c.textoEscuro) root.style.setProperty('--texto-escuro', c.textoEscuro);
+    if (c.textoMedio) root.style.setProperty('--texto-medio', c.textoMedio);
+    if (c.textoClaro) root.style.setProperty('--texto-claro', c.textoClaro);
 }

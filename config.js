@@ -1,10 +1,10 @@
-﻿const SITE_CONFIG = {
+const SITE_CONFIG = {
     "nome": "Silva & Firmino Advogados",
     "slogan": "Excelência jurídica com compromisso e dedicação",
     "descricao": "Escritório de advocacia especializado em soluções jurídicas personalizadas, com atuação ética e transparente.",
     "cores": {
-        "gradientePrincipal": "linear-gradient(135deg, #0A1A2F 0%, #1B3A5C 50%, #274B6D 100%)",
-        "gradienteDestaque": "linear-gradient(135deg, #C9A24B 0%, #E8C877 100%)",
+        "gradientePrincipal": "linear-gradient(135deg, #0A1A2F 0%, #0F766E 50%, #14958A 100%)",
+        "gradienteDestaque": "linear-gradient(135deg, #B45309 0%, #D97706 50%, #F59E0B 100%)",
         "fundoClaro": "#F7F5F0",
         "textoEscuro": "#1B3A5C",
         "textoMedio": "#5A6570",
@@ -100,7 +100,6 @@
     "lgpd": {
         "cnpj": "00.000.000/0001-00",
         "oab": "OAB/SP 000.000",
-
         "email": "privacidade@firminus.adv.br"
     },
     "rotativoInformativo": [
